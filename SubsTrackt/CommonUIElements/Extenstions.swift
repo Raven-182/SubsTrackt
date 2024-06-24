@@ -32,4 +32,18 @@ extension Color{
     static let backgroundColor = Color("BackgroundColor")
     static let textColor = Color("Text")
     static let secondaryTextColor = Color("SecondaryTextColor")
+    
+    init(hex: String) {
+            let scanner = Scanner(string: hex)
+            scanner.scanLocation = hex.hasPrefix("#") ? 1 : 0
+
+            var rgbValue: UInt64 = 0
+            scanner.scanHexInt64(&rgbValue)
+
+            let red = Double((rgbValue >> 16) & 0xff) / 255
+            let green = Double((rgbValue >> 8) & 0xff) / 255
+            let blue = Double(rgbValue & 0xff) / 255
+
+            self.init(red: red, green: green, blue: blue)
+        }
 }
