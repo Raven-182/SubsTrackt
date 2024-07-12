@@ -32,7 +32,7 @@ extension Color{
     static let backgroundColor = Color("BackgroundColor")
     static let textColor = Color("Text")
     static let secondaryTextColor = Color("SecondaryTextColor")
-    
+    static let buttonColor = Color("AccentColor")
     init(hex: String) {
             let scanner = Scanner(string: hex)
             scanner.scanLocation = hex.hasPrefix("#") ? 1 : 0

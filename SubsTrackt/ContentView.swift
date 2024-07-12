@@ -6,21 +6,29 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-                .font(Font.Poppins.semiBold.font(size: 35)).foregroundColor(Color.textColor)
-        }
-        .padding()
-        .background(Color.backgroundColor)
-        
-    }
-    
+    @State private var userLoggedIn = (Auth.auth().currentUser != nil)
+
+       var body: some View {
+           VStack {
+               if userLoggedIn {
+                   SplashScreen()
+               } else {
+                   LoginView()
+               }
+           }.onAppear{
+               //Firebase state change listeneer
+               Auth.auth().addStateDidChangeListener{ auth, user in
+                   if (user != nil) {
+                       userLoggedIn = true
+                   } else {
+                       userLoggedIn = false
+                   }
+               }
+           }
+       }
 }
 #Preview {
     ContentView()

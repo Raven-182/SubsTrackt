@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>62296408929-hie2650h3cm8h1b9f5jg1h91nu64qccm.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.62296408929-hie2650h3cm8h1b9f5jg1h91nu64qccm</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCnWlBDh96Qhd7iyFu0oiSm1lbqJSJYTPs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>62296408929</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>raven.SubsTrackt</string>
+	<key>PROJECT_ID</key>
+	<string>substrackt</string>
+	<key>STORAGE_BUCKET</key>
+	<string>substrackt.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:62296408929:ios:08d358351d059482253b20</string>
+</dict>
+</plist>
