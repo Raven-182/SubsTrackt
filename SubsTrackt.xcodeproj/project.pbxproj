@@ -15,9 +15,10 @@
 		979C7B682C34AF1100F797AD /* CustomUIItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C7B672C34AF1100F797AD /* CustomUIItems.swift */; };
 		979C7B6B2C34B2AA00F797AD /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 979C7B6A2C34B2AA00F797AD /* GoogleSignIn */; };
 		979C7B6D2C34B2AA00F797AD /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 979C7B6C2C34B2AA00F797AD /* GoogleSignInSwift */; };
-		979C7B6F2C34B2D500F797AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 979C7B6E2C34B2D500F797AD /* GoogleService-Info.plist */; };
 		979C7B712C34B4BD00F797AD /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C7B702C34B4BD00F797AD /* AuthViewModel.swift */; };
 		979C7B732C3F546D00F797AD /* TransparentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C7B722C3F546D00F797AD /* TransparentView.swift */; };
+		979C7B752C40B45E00F797AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 979C7B742C40B45E00F797AD /* GoogleService-Info.plist */; };
+		979C7B772C4737B500F797AD /* SubscriptionsCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C7B762C4737B500F797AD /* SubscriptionsCalendarView.swift */; };
 		97CC82E92C24FE6000E0AA19 /* SubsTracktApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CC82E82C24FE6000E0AA19 /* SubsTracktApp.swift */; };
 		97CC82EB2C24FE6000E0AA19 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CC82EA2C24FE6000E0AA19 /* ContentView.swift */; };
 		97CC82ED2C24FE6700E0AA19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97CC82EC2C24FE6700E0AA19 /* Assets.xcassets */; };
@@ -53,9 +54,10 @@
 /* Begin PBXFileReference section */
 		976689122C2B986000DB9855 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		979C7B672C34AF1100F797AD /* CustomUIItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIItems.swift; sourceTree = "<group>"; };
-		979C7B6E2C34B2D500F797AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		979C7B702C34B4BD00F797AD /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		979C7B722C3F546D00F797AD /* TransparentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentView.swift; sourceTree = "<group>"; };
+		979C7B742C40B45E00F797AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		979C7B762C4737B500F797AD /* SubscriptionsCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsCalendarView.swift; sourceTree = "<group>"; };
 		97CC82E52C24FE6000E0AA19 /* SubsTrackt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SubsTrackt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97CC82E82C24FE6000E0AA19 /* SubsTracktApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsTracktApp.swift; sourceTree = "<group>"; };
 		97CC82EA2C24FE6000E0AA19 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -129,7 +131,7 @@
 		97CC82E72C24FE6000E0AA19 /* SubsTrackt */ = {
 			isa = PBXGroup;
 			children = (
-				979C7B6E2C34B2D500F797AD /* GoogleService-Info.plist */,
+				979C7B742C40B45E00F797AD /* GoogleService-Info.plist */,
 				97CC83272C28E0D100E0AA19 /* Login */,
 				97CC83222C28965200E0AA19 /* CommonUIElements */,
 				97CC83192C288FD900E0AA19 /* Info.plist */,
@@ -184,6 +186,7 @@
 			children = (
 				97CC83212C28963A00E0AA19 /* MainTab */,
 				979C7B672C34AF1100F797AD /* CustomUIItems.swift */,
+				979C7B762C4737B500F797AD /* SubscriptionsCalendarView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -335,7 +338,7 @@
 				97CC82F02C24FE6700E0AA19 /* Preview Assets.xcassets in Resources */,
 				97CC82ED2C24FE6700E0AA19 /* Assets.xcassets in Resources */,
 				97CC831F2C28952B00E0AA19 /* Poppins-Medium.otf in Resources */,
-				979C7B6F2C34B2D500F797AD /* GoogleService-Info.plist in Resources */,
+				979C7B752C40B45E00F797AD /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				976689132C2B986000DB9855 /* LoginView.swift in Sources */,
+				979C7B772C4737B500F797AD /* SubscriptionsCalendarView.swift in Sources */,
 				97CC83292C28E0E600E0AA19 /* SplashScreen.swift in Sources */,
 				979C7B682C34AF1100F797AD /* CustomUIItems.swift in Sources */,
 				97CC82EB2C24FE6000E0AA19 /* ContentView.swift in Sources */,

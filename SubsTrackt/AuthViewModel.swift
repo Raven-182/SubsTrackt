@@ -42,6 +42,17 @@ struct Authentication {
         try await Auth.auth().signIn(with: credential)
     }
     
+    
+    
+    func emailSignUP(email: String, password: String){
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+          // ...
+        }
+        
+        
+    }
+    
+    
     func logout() async throws {
         GIDSignIn.sharedInstance.signOut()
         try Auth.auth().signOut()

@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 
+
 struct ContentView: View {
     @State private var userLoggedIn = (Auth.auth().currentUser != nil)
 
