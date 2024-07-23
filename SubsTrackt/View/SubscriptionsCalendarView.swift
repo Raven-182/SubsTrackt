@@ -8,12 +8,26 @@
 import Foundation
 import SwiftUI
 struct SubscriptionsCalendarView: View{
+    @State private var selectedYear: Int
+    @State private var selectedMonth: String
+    var months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov","dec"]
+    let years = Array(2023...2030)
     
-    var month_ills = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep"]
+    init() {
+         let currentDate = Date()
+         let calendar = Calendar.current
+         let currentYear = calendar.component(.year, from: currentDate)
+ 
+         let monthFormatter = DateFormatter()
+         monthFormatter.dateFormat = "MMM"
+         let monthString = monthFormatter.string(from: currentDate).lowercased()
+         
+         _selectedYear = State(initialValue: currentYear)
+         _selectedMonth = State(initialValue: monthString)
+     }
     var body: some View{
         
         ZStack {
-            // Three-Color Gradient Background
             LinearGradient(
                 gradient: Gradient(colors: [Color(hex: "#22313F"), Color(hex: "#1A252F"), Color(hex: "#16222A")]),
                 startPoint: .leading,
@@ -22,34 +36,77 @@ struct SubscriptionsCalendarView: View{
             .edgesIgnoringSafeArea(.all)
             
             VStack {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack() {
-                                ForEach(month_ills, id: \.self) { month in
+                    HStack {
+                        Text("Your Bills")
+                            .font(.Poppins.semiBold.font(size: 25))
+                            .padding(.horizontal, 25)
+                        Spacer()
+                        Picker("Select Year", selection: $selectedYear) {
+                            ForEach(years, id: \.self) { year in
+                                Text(String(year)).tag(year)
+                            }
+                        }
+                        .pickerStyle(MenuPickerStyle())  // Dropdown style
+                        .padding(.horizontal)
+                        .foregroundColor(.white)
+                    }
+                
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        ScrollViewReader { scrollView in
+                            HStack {
+                                ForEach(months, id: \.self) { month in
                                     Image(month)
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                        .frame(width: 300, height: 300)
-                                        .cornerRadius(50)
+                                        .frame(width: 250, height: 250)
+                                        .cornerRadius(40)
                                         .shadow(color: Color.black.opacity(0.5), radius: 5, x: -5, y: -8)
+                                    //MARK: binding selected month state variable to the month being selected. make it bound to which month is in focus
+                                        .onTapGesture {
+                                            selectedMonth = month
+                                        }
                                 }
-                                .padding(.horizontal, 15)
-                                //image animation, iIdentity means when the image is in the view not entering or leaving the view
-                                .scrollTransition{
+                                .padding(.horizontal)
+                                .scrollTransition {
                                     content, phase in content
-                                        .opacity(phase.isIdentity ? 1.0: 0.5)
+                                        .opacity(phase.isIdentity ? 1.0 : 0.5)
                                 }
-                               
                             }
-                            
-                            .scrollTargetLayout()
-                            .padding(.horizontal)
+                            //shows the current month
+                            .onAppear {
+                                if let index = months.firstIndex(of: selectedMonth) {
+                                    scrollView.scrollTo(months[index], anchor: .center )
+                                }
+                            }
                         }
-                        .contentMargins(16, for: .scrollContent)
-                        .scrollTargetBehavior(.viewAligned)
-                        Spacer()
+                        .scrollTargetLayout()
+                        //remove padding to center when onAppear
+                        .padding(.horizontal, 40)
+                        
+            
                     }
-                    .padding(.top, 50) // Adjust the top padding as needed
-        }
+                    
+                    .contentMargins(16, for: .scrollContent)
+                    .scrollTargetBehavior(.viewAligned)
+                
+                  
+                
+//            MARK: display the data for that month
+                HStack{
+                    Text("\(selectedMonth.capitalized)")
+                        .font(.Poppins.semiBold.font(size: 20))
+                                         .foregroundColor(.white)
+                    Spacer()
+                  
+                }
+                .padding()
+                Spacer()
+                }
+                .padding(.top, 30)
+            
+            }
+        
     }
 }
 

@@ -19,6 +19,7 @@
 		979C7B732C3F546D00F797AD /* TransparentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C7B722C3F546D00F797AD /* TransparentView.swift */; };
 		979C7B752C40B45E00F797AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 979C7B742C40B45E00F797AD /* GoogleService-Info.plist */; };
 		979C7B772C4737B500F797AD /* SubscriptionsCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C7B762C4737B500F797AD /* SubscriptionsCalendarView.swift */; };
+		979C7B7A2C4F216200F797AD /* SubscriptionsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C7B792C4F216200F797AD /* SubscriptionsData.swift */; };
 		97CC82E92C24FE6000E0AA19 /* SubsTracktApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CC82E82C24FE6000E0AA19 /* SubsTracktApp.swift */; };
 		97CC82EB2C24FE6000E0AA19 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CC82EA2C24FE6000E0AA19 /* ContentView.swift */; };
 		97CC82ED2C24FE6700E0AA19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97CC82EC2C24FE6700E0AA19 /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 		979C7B722C3F546D00F797AD /* TransparentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentView.swift; sourceTree = "<group>"; };
 		979C7B742C40B45E00F797AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		979C7B762C4737B500F797AD /* SubscriptionsCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsCalendarView.swift; sourceTree = "<group>"; };
+		979C7B792C4F216200F797AD /* SubscriptionsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsData.swift; sourceTree = "<group>"; };
 		97CC82E52C24FE6000E0AA19 /* SubsTrackt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SubsTrackt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97CC82E82C24FE6000E0AA19 /* SubsTracktApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubsTracktApp.swift; sourceTree = "<group>"; };
 		97CC82EA2C24FE6000E0AA19 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,6 +110,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		979C7B782C4F215200F797AD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				979C7B792C4F216200F797AD /* SubscriptionsData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		97CC82DC2C24FE6000E0AA19 = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +141,7 @@
 		97CC82E72C24FE6000E0AA19 /* SubsTrackt */ = {
 			isa = PBXGroup;
 			children = (
+				979C7B782C4F215200F797AD /* Model */,
 				979C7B742C40B45E00F797AD /* GoogleService-Info.plist */,
 				97CC83272C28E0D100E0AA19 /* Login */,
 				97CC83222C28965200E0AA19 /* CommonUIElements */,
@@ -373,6 +384,7 @@
 				97CC82E92C24FE6000E0AA19 /* SubsTracktApp.swift in Sources */,
 				979C7B732C3F546D00F797AD /* TransparentView.swift in Sources */,
 				97CC83242C28971000E0AA19 /* Extenstions.swift in Sources */,
+				979C7B7A2C4F216200F797AD /* SubscriptionsData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

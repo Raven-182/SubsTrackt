@@ -17,10 +17,9 @@ struct ContentView: View {
                if userLoggedIn {
                    SplashScreen()
                } else {
-                   LoginView()
+                   SubscriptionsCalendarView()
                }
            }.onAppear{
-               //Firebase state change listeneer
                Auth.auth().addStateDidChangeListener{ auth, user in
                    if (user != nil) {
                        userLoggedIn = true
