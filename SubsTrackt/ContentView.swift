@@ -17,7 +17,9 @@ struct ContentView: View {
                if userLoggedIn {
                    SplashScreen()
                } else {
-                   SubscriptionsCalendarView()
+                
+                       SubscriptionsCalendarView()
+                   
                }
            }.onAppear{
                Auth.auth().addStateDidChangeListener{ auth, user in

@@ -25,8 +25,7 @@ struct SubscriptionsCalendarView: View{
          _selectedYear = State(initialValue: currentYear)
          _selectedMonth = State(initialValue: monthString)
      }
-    var body: some View{
-        
+    var body: some View {
         ZStack {
             LinearGradient(
                 gradient: Gradient(colors: [Color(hex: "#22313F"), Color(hex: "#1A252F"), Color(hex: "#16222A")]),
@@ -36,83 +35,98 @@ struct SubscriptionsCalendarView: View{
             .edgesIgnoringSafeArea(.all)
             
             VStack {
-                    HStack {
-                        Text("Your Bills")
-                            .font(.Poppins.semiBold.font(size: 25))
-                            .padding(.horizontal, 25)
-                        Spacer()
-                        Picker("Select Year", selection: $selectedYear) {
-                            ForEach(years, id: \.self) { year in
-                                Text(String(year)).tag(year)
-                            }
-                        }
-                        .pickerStyle(MenuPickerStyle())  // Dropdown style
-                        .padding(.horizontal)
+                HStack {
+                    Text("Your Bills")
+                        .font(.Poppins.semiBold.font(size: 25))
                         .foregroundColor(.white)
+                        .padding(.horizontal, 25)
+                    Spacer()
+                    Picker("Select Year", selection: $selectedYear) {
+                        ForEach(years, id: \.self) { year in
+                            Text(String(year)).tag(year)
+                        }
                     }
+                    .pickerStyle(MenuPickerStyle())  // Dropdown style
+                    .padding(.horizontal)
+                    .foregroundColor(.white)
+                }
                 
-                    
+                GeometryReader { geometry in
                     ScrollView(.horizontal, showsIndicators: false) {
                         ScrollViewReader { scrollView in
-                            HStack {
+                            HStack{
                                 ForEach(months, id: \.self) { month in
-                                    Image(month)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 250, height: 250)
-                                        .cornerRadius(40)
-                                        .shadow(color: Color.black.opacity(0.5), radius: 5, x: -5, y: -8)
-                                    //MARK: binding selected month state variable to the month being selected. make it bound to which month is in focus
-                                        .onTapGesture {
-                                            selectedMonth = month
-                                        }
+                                    GeometryReader { geo in
+                                        //mid point of the image within th eglobal coordinate
+                                        let midX = geo.frame(in: .global).midX
+                                        //mid point of the parent frame(scrollview)
+                                        let screenMidX = geometry.size.width / 2
+
+                                        Image(month)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: geometry.size.width - 60, height: 250)
+                                            .cornerRadius(40)
+                                            .shadow(color: Color.black.opacity(0.5), radius: 5, x: -5, y: -8)
+                                        
+                                        //adding animation, reduce the size
+                                            .scrollTransition(.animated.threshold(.visible(0.9))) { content, phase in
+                                                        content
+                                                    .opacity(phase.isIdentity ? 1 : 0)
+                                                            .scaleEffect(phase.isIdentity ? 1 : 0.8)
+                                             
+                                                    }
+                                //is image's center within 20 points of the screen center, newValue id the new imagi=e center
+                                        //When using .onChange(of:), the parameter in the closure represents the new value of the observed state or value.
+                                            .onChange(of: midX) {oldValue, newValue in
+                                                if abs(newValue - screenMidX) < 20 {
+                                                    selectedMonth = month
+                                                }
+                                            }
+                                    }
+                                    //offsetting frame size by 60
+                                    .frame(width: geometry.size.width - 40, height: 250)
                                 }
-                                .padding(.horizontal)
-                                .scrollTransition {
-                                    content, phase in content
-                                        .opacity(phase.isIdentity ? 1.0 : 0.5)
-                                }
+                                .padding(.horizontal, 10)
                             }
-                            //shows the current month
+                            //when hstack appears on screen scroll to the current month
                             .onAppear {
                                 if let index = months.firstIndex(of: selectedMonth) {
-                                    scrollView.scrollTo(months[index], anchor: .center )
+                                    scrollView.scrollTo(months[index], anchor: .center)
                                 }
                             }
                         }
                         .scrollTargetLayout()
-                        //remove padding to center when onAppear
-                        .padding(.horizontal, 40)
-                        
-            
+                        .padding(.horizontal, 10)
                     }
-                    
                     .contentMargins(16, for: .scrollContent)
                     .scrollTargetBehavior(.viewAligned)
+                }
+                //need to ensure that the scrollview has fixed height because geometry reader takes the entire available spance
+                .frame(height: 250)
+                .padding(.bottom, 20)
                 
-                  
-                
-//            MARK: display the data for that month
-                HStack{
+                HStack {
                     Text("\(selectedMonth.capitalized)")
                         .font(.Poppins.semiBold.font(size: 20))
-                                         .foregroundColor(.white)
+                        .foregroundColor(.white)
                     Spacer()
-                  
                 }
-                .padding()
+                .padding(.horizontal, 20)
                 Spacer()
-                }
-                .padding(.top, 30)
-            
+                
+                // Display the selected month
+
             }
-        
+            .padding(.top, 30)
+            
+        }
     }
 }
 
 struct Calendar_view: PreviewProvider {
     static var previews: some View {
-        SubscriptionsCalendarView().preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+        SubscriptionsCalendarView()
     }
 }
 
