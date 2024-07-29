@@ -85,7 +85,7 @@ struct LoginView: View {
                                     }
                                 }
                     CustomSignUpButton(title: "Email Sign In", iconName: "google") {
-                        print("Sign up with email button tapped")
+                        print("Email sign up ")
                     }
                     
                 }

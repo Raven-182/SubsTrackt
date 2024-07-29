@@ -10,6 +10,7 @@ import SwiftUI
 struct SubscriptionsCalendarView: View{
     @State private var selectedYear: Int
     @State private var selectedMonth: String
+
     var months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov","dec"]
     let years = Array(2023...2030)
     
@@ -32,7 +33,7 @@ struct SubscriptionsCalendarView: View{
                 startPoint: .leading,
                 endPoint: .trailing
             )
-            .edgesIgnoringSafeArea(.all)
+            .ignoresSafeArea()
             
             VStack {
                 HStack {
@@ -43,7 +44,7 @@ struct SubscriptionsCalendarView: View{
                     Spacer()
                     Picker("Select Year", selection: $selectedYear) {
                         ForEach(years, id: \.self) { year in
-                            Text(String(year)).tag(year)
+                            Text(String(year)).tag(year).font(.Poppins.semiBold.font())
                         }
                     }
                     .pickerStyle(MenuPickerStyle())  // Dropdown style
@@ -115,6 +116,16 @@ struct SubscriptionsCalendarView: View{
                 .padding(.horizontal, 20)
                 Spacer()
                 
+                Button("Logout"){Task {
+                    do {
+                        try await Authentication().logout()
+                    } catch {
+
+                    print(error.localizedDescription)
+                        // Handle error
+                    }
+                }
+                }
                 // Display the selected month
 
             }

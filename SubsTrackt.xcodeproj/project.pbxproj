@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9765C89E2C53DEA800322943 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9765C89D2C53DEA800322943 /* SignUpViewModel.swift */; };
+		9765C8A02C56977A00322943 /* AddNewSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9765C89F2C56977A00322943 /* AddNewSubscriptionView.swift */; };
 		976689132C2B986000DB9855 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976689122C2B986000DB9855 /* LoginView.swift */; };
 		976689182C2B9D7C00DB9855 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 976689172C2B9D7C00DB9855 /* FirebaseAuth */; };
 		9766891A2C2B9D7C00DB9855 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 976689192C2B9D7C00DB9855 /* FirebaseDatabase */; };
 		9766891C2C2B9D7C00DB9855 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9766891B2C2B9D7C00DB9855 /* FirebaseDatabaseSwift */; };
 		9766891E2C2B9D7C00DB9855 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 9766891D2C2B9D7C00DB9855 /* FirebaseStorage */; };
+		976B71A32C57DE4D001FFD9C /* SubscriptionCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976B71A22C57DE4D001FFD9C /* SubscriptionCategories.swift */; };
 		979C7B682C34AF1100F797AD /* CustomUIItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C7B672C34AF1100F797AD /* CustomUIItems.swift */; };
 		979C7B6B2C34B2AA00F797AD /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 979C7B6A2C34B2AA00F797AD /* GoogleSignIn */; };
 		979C7B6D2C34B2AA00F797AD /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 979C7B6C2C34B2AA00F797AD /* GoogleSignInSwift */; };
@@ -53,7 +56,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9765C89D2C53DEA800322943 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		9765C89F2C56977A00322943 /* AddNewSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewSubscriptionView.swift; sourceTree = "<group>"; };
 		976689122C2B986000DB9855 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		976B71A22C57DE4D001FFD9C /* SubscriptionCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCategories.swift; sourceTree = "<group>"; };
 		979C7B672C34AF1100F797AD /* CustomUIItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIItems.swift; sourceTree = "<group>"; };
 		979C7B702C34B4BD00F797AD /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		979C7B722C3F546D00F797AD /* TransparentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentView.swift; sourceTree = "<group>"; };
@@ -114,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				979C7B792C4F216200F797AD /* SubscriptionsData.swift */,
+				976B71A22C57DE4D001FFD9C /* SubscriptionCategories.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -198,6 +205,7 @@
 				97CC83212C28963A00E0AA19 /* MainTab */,
 				979C7B672C34AF1100F797AD /* CustomUIItems.swift */,
 				979C7B762C4737B500F797AD /* SubscriptionsCalendarView.swift */,
+				9765C89F2C56977A00322943 /* AddNewSubscriptionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -224,6 +232,7 @@
 			children = (
 				97CC83282C28E0E600E0AA19 /* SplashScreen.swift */,
 				976689122C2B986000DB9855 /* LoginView.swift */,
+				9765C89D2C53DEA800322943 /* SignUpViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -375,6 +384,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				976689132C2B986000DB9855 /* LoginView.swift in Sources */,
+				9765C8A02C56977A00322943 /* AddNewSubscriptionView.swift in Sources */,
+				976B71A32C57DE4D001FFD9C /* SubscriptionCategories.swift in Sources */,
 				979C7B772C4737B500F797AD /* SubscriptionsCalendarView.swift in Sources */,
 				97CC83292C28E0E600E0AA19 /* SplashScreen.swift in Sources */,
 				979C7B682C34AF1100F797AD /* CustomUIItems.swift in Sources */,
@@ -384,6 +395,7 @@
 				97CC82E92C24FE6000E0AA19 /* SubsTracktApp.swift in Sources */,
 				979C7B732C3F546D00F797AD /* TransparentView.swift in Sources */,
 				97CC83242C28971000E0AA19 /* Extenstions.swift in Sources */,
+				9765C89E2C53DEA800322943 /* SignUpViewModel.swift in Sources */,
 				979C7B7A2C4F216200F797AD /* SubscriptionsData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

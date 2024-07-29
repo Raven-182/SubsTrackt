@@ -46,14 +46,20 @@ struct Authentication {
     
     func emailSignUP(email: String, password: String){
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-          // ...
+          print("Couldnt perform email sign up")
         }
+        
+        func emailSignIn(email: String, password: String){
+            Auth.auth().signIn(withEmail: email, password: password)
+
+        }
+        
         
         
     }
     
     
-    func logout() async throws {
+   func logout() async throws {
         GIDSignIn.sharedInstance.signOut()
         try Auth.auth().signOut()
     }

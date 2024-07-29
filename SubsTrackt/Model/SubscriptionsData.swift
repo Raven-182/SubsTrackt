@@ -13,5 +13,6 @@ struct Subscription: Identifiable, Codable {
     var month: String
     var description: String
     var amount: Double
+    var category: String
 }
 

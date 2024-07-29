@@ -1,4 +1,4 @@
-//
+
 //  ContentView.swift
 //  SubsTrackt
 //
@@ -15,10 +15,11 @@ struct ContentView: View {
        var body: some View {
            VStack {
                if userLoggedIn {
-                   SplashScreen()
+                   LoginView()
                } else {
-                
-                       SubscriptionsCalendarView()
+                   
+                   SubscriptionsCalendarView()
+                       
                    
                }
            }.onAppear{
