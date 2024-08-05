@@ -47,3 +47,11 @@ extension Color{
             self.init(red: red, green: green, blue: blue)
         }
 }
+
+enum AppGradients {
+    static let primaryBackground = LinearGradient(
+        gradient: Gradient(colors: [Color(hex: "#22313F"), Color(hex: "#1A252F"), Color(hex: "#16222A")]),
+        startPoint: .leading,
+        endPoint: .trailing
+    )
+}

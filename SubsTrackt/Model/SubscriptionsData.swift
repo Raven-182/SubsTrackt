@@ -9,8 +9,8 @@ import Foundation
 
 struct Subscription: Identifiable, Codable {
     var id: String
-    var year: Int
-    var month: String
+    var endDate: Date
+    var startDate: Date
     var description: String
     var amount: Double
     var category: String

@@ -31,9 +31,9 @@ enum SubscriptionCategory: String, CaseIterable, Identifiable {
     var logo: String {
         switch self {
         case .youtube:
-            return "youtube_logo"
+            return "youtube"
         case .spotify:
-            return "spotify_logo"
+            return "spotify"
         case .netflix:
             return "netflix_logo"
         case .openAI:
@@ -64,7 +64,7 @@ enum SubscriptionCategory: String, CaseIterable, Identifiable {
     var displayName: String {
         switch self {
         case .youtube:
-            return "YouTube"
+            return "YouTube Premium"
         case .spotify:
             return "Spotify"
         case .netflix:

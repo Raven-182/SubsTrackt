@@ -150,7 +150,6 @@
 			children = (
 				979C7B782C4F215200F797AD /* Model */,
 				979C7B742C40B45E00F797AD /* GoogleService-Info.plist */,
-				97CC83272C28E0D100E0AA19 /* Login */,
 				97CC83222C28965200E0AA19 /* CommonUIElements */,
 				97CC83192C288FD900E0AA19 /* Info.plist */,
 				97CC83132C288B0700E0AA19 /* View */,
@@ -202,6 +201,7 @@
 		97CC83132C288B0700E0AA19 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				97CC83272C28E0D100E0AA19 /* Login */,
 				97CC83212C28963A00E0AA19 /* MainTab */,
 				979C7B672C34AF1100F797AD /* CustomUIItems.swift */,
 				979C7B762C4737B500F797AD /* SubscriptionsCalendarView.swift */,
