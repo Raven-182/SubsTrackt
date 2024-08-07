@@ -6,6 +6,7 @@ struct AddNewSubscriptionView: View {
     @State var description: String = ""
     @State var startDate: Date = Date.now
     @State var endDate: Date = Date()
+    @State var amount: Double = 0.0
     
     var body: some View {
         ZStack {
@@ -119,15 +120,52 @@ struct AddNewSubscriptionView: View {
                     
                 }.padding()
                 
-                HStack{
+                HStack(alignment: .center){
                     Button{
-                    
+                        amount -= 1.0
+                        if amount < 0.0{
+                            amount = 0.0
+                        }
                     } label: {
-                        Image("")
+                        Image("minus")
                             .resizable()
                             .frame(width: 50, height: 50)
+                            .background(Color(.gray).opacity(0.2))
+                            .cornerRadius(10)
                     }
-                }
+                    Spacer()
+                    VStack{
+                        Text("Monthly Price").font(.Poppins.medium.font(size: 12 )).foregroundColor(.white)
+                        TextField("", value: $amount, formatter: NumberFormatter())
+                               
+                                                    .frame(width: 80, height: 40)
+                                                    .background(
+                                                        AppGradients.primaryBackground
+                                                            .cornerRadius(8)
+                                                    )
+                                                    .overlay(
+                                                        RoundedRectangle(cornerRadius: 8)
+                                                            .stroke(Color.white, lineWidth: 0.1)
+                                                    )
+                                                    .foregroundColor(.white)
+                                                    .multilineTextAlignment(.center)
+                                                    .padding(.bottom, 28)
+                    }
+                    
+                    Spacer()
+                    Button{
+                        amount += 1.0
+                        
+                    } label: {
+                        Image("plus")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .background(Color(.gray).opacity(0.2))
+                                                       .cornerRadius(10)
+                    }
+                    
+                    
+                }.padding(.horizontal, 40)
 
                 Spacer()
             }
