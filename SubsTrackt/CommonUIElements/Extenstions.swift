@@ -55,3 +55,46 @@ enum AppGradients {
         endPoint: .trailing
     )
 }
+
+
+
+struct primaryButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(red: 0.88, green: 0.55, blue: 0.65), 
+                        Color(red: 0.78, green: 0.24, blue: 0.41)
+                    ]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+
+)
+            .foregroundStyle(.white)
+            .clipShape(Capsule())
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
+    }
+}
+//LinearGradient(
+//    gradient: Gradient(colors: [
+//        Color(red: 0.7, green: 0.5, blue: 0.9), // Lighter purple shade
+//        Color(red: 0.5, green: 0.2, blue: 0.7) // Darker purple shade
+//    ]),
+//    startPoint: .topLeading,
+//    endPoint: .bottomTrailing
+//)
+
+
+//pink gradient
+//LinearGradient(
+//    gradient: Gradient(colors: [
+//        Color(red: 0.88, green: 0.55, blue: 0.65), // Lighter pink shade
+//        Color(red: 0.78, green: 0.24, blue: 0.41) // Darker pink shade
+//    ]),
+//    startPoint: .topLeading,
+//    endPoint: .bottomTrailing
+//)

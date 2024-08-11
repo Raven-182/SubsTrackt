@@ -29,10 +29,10 @@ struct AddNewSubscriptionView: View {
                         
                         VStack {
                             Text("Add a new subscription")
-                                .font(.Poppins.semiBold.font(size: 30))
+                                .font(.Poppins.semiBold.font(size: 28))
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.center)
-                            
+                                .padding(.bottom, 1)
                             ScrollView(.horizontal, showsIndicators: false) {
                                 ScrollViewReader { _ in
                                     HStack {
@@ -46,7 +46,7 @@ struct AddNewSubscriptionView: View {
                                                 Image(sub.logo)
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fill)
-                                                    .frame(width: 200, height: 200)
+                                                    .frame(width: 200, height: 180)
                                                     .cornerRadius(40)
                                                     .shadow(color: Color.black.opacity(0.5), radius: 5, x: -5, y: -8)
                                                     .scrollTransition(.animated.threshold(.visible(0.8))) { content, phase in
@@ -71,6 +71,7 @@ struct AddNewSubscriptionView: View {
                             Text(selectedCategory)
                                 .font(.Poppins.semiBold.font(size: 22))
                                 .foregroundColor(.white)
+
                         }
                         .padding(50)
                     }
@@ -82,7 +83,7 @@ struct AddNewSubscriptionView: View {
 //                                           .padding(.horizontal, 15)
                 TextField("", text: $description, prompt: Text("Description").foregroundColor(.white))
                                                .padding()
-                                               .frame(height: 50)
+                                               .frame(height: 60)
                                                .background(
                                                    AppGradients.primaryBackground
                                                        .cornerRadius(8)
@@ -92,7 +93,7 @@ struct AddNewSubscriptionView: View {
                                                     .stroke(Color.white, lineWidth: 0.1)
                                                )
                                                .foregroundColor(.white)
-                                               .padding(.top, 20)
+                                               .padding(.top, 25)
                                                .padding(.horizontal)
                 
                 
@@ -105,7 +106,7 @@ struct AddNewSubscriptionView: View {
                          displayedComponents: [.date]
                      )
                      .datePickerStyle(CompactDatePickerStyle())
-                     .frame(height: 50) // Smaller height
+                     .frame(height: 80)
                      .colorScheme(.dark)
                      // End Date DatePicker
                      DatePicker(
@@ -114,8 +115,6 @@ struct AddNewSubscriptionView: View {
                          displayedComponents: [.date]
                      )
                      .datePickerStyle(CompactDatePickerStyle())
-    
-                     .frame(height: 50) // Smaller height
                      .colorScheme(.dark)
                     
                 }.padding()
@@ -129,8 +128,7 @@ struct AddNewSubscriptionView: View {
                     } label: {
                         Image("minus")
                             .resizable()
-                            .frame(width: 50, height: 50)
-                            .background(Color(.gray).opacity(0.2))
+                            .frame(width: 60, height: 60)
                             .cornerRadius(10)
                     }
                     Spacer()
@@ -138,18 +136,15 @@ struct AddNewSubscriptionView: View {
                         Text("Monthly Price").font(.Poppins.medium.font(size: 12 )).foregroundColor(.white)
                         TextField("", value: $amount, formatter: NumberFormatter())
                                
-                                                    .frame(width: 80, height: 40)
-                                                    .background(
-                                                        AppGradients.primaryBackground
-                                                            .cornerRadius(8)
-                                                    )
-                                                    .overlay(
+                                                    .frame(width: 100, height: 50)
+                                                                           .overlay(
                                                         RoundedRectangle(cornerRadius: 8)
                                                             .stroke(Color.white, lineWidth: 0.1)
                                                     )
                                                     .foregroundColor(.white)
                                                     .multilineTextAlignment(.center)
                                                     .padding(.bottom, 28)
+                                                    .padding(.top, 5)
                     }
                     
                     Spacer()
@@ -159,15 +154,22 @@ struct AddNewSubscriptionView: View {
                     } label: {
                         Image("plus")
                             .resizable()
-                            .frame(width: 50, height: 50)
-                            .background(Color(.gray).opacity(0.2))
-                                                       .cornerRadius(10)
+                            .frame(width: 60, height: 60)
+                            .cornerRadius(10)
                     }
                     
                     
                 }.padding(.horizontal, 40)
 
                 Spacer()
+                
+                Button("Add subscription") {
+                
+                            print("Button pressed!")
+                        }
+                .font(.Poppins.semiBold.font(size: 16))
+                        .buttonStyle(primaryButton())
+                        .padding(.bottom, 20)
             }
         }
     }
