@@ -62,17 +62,7 @@ struct primaryButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding()
-            .background(
-                LinearGradient(
-                    gradient: Gradient(colors: [
-                        Color(red: 0.88, green: 0.55, blue: 0.65), 
-                        Color(red: 0.78, green: 0.24, blue: 0.41)
-                    ]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-
-)
+            .background(Color(red: 0.5, green: 0.2, blue: 0.7))
             .foregroundStyle(.white)
             .clipShape(Capsule())
             .scaleEffect(configuration.isPressed ? 1.2 : 1)

@@ -28,6 +28,17 @@ struct AddNewSubscriptionView: View {
                             )
                         
                         VStack {
+                            HStack{
+                                
+                                //MARK: Navigation handle here
+                                Button{
+                                    print("Go back please!")
+                                }      label: {
+                                    Image(systemName: "chevron.left")
+                                    
+                                }
+                                Spacer()
+                            }
                             Text("Add a new subscription")
                                 .font(.Poppins.semiBold.font(size: 28))
                                 .foregroundColor(.white)
@@ -164,8 +175,6 @@ struct AddNewSubscriptionView: View {
                 Spacer()
                 
                 Button("Add subscription") {
-                
-                            print("Button pressed!")
                         }
                 .font(.Poppins.semiBold.font(size: 16))
                         .buttonStyle(primaryButton())
