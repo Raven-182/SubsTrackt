@@ -173,7 +173,7 @@ struct AddNewSubscriptionView: View {
                 }.padding(.horizontal, 40)
 
                 Spacer()
-                
+
                 Button("Add subscription") {
                         }
                 .font(.Poppins.semiBold.font(size: 16))

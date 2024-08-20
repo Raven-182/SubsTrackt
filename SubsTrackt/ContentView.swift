@@ -15,10 +15,12 @@ struct ContentView: View {
        var body: some View {
            VStack {
                if userLoggedIn {
-                   LoginView()
+                  //SubscriptionsCalendarView()
+                   TestAddSubscriptionView()
+                  
                } else {
                    
-                   AddNewSubscriptionView()
+                   LoginView()
                        
                    
                }

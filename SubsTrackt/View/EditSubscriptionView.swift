@@ -6,13 +6,17 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 
 struct EditSubscriptionView: View {
     
+    //to get database stuff
+    @ObservedObject var databaseManager = DatabaseManager()
+    @State private var userID: String? = Auth.auth().currentUser?.uid
     
     //MARK: Edit to get the name logo and other info from the database
-    var sample = Subscription(id: "123", endDate: Date(), startDate: Date(), description: "Something something", amount: 12.00, category: "food")
+
     
     var body: some View {
         ZStack {
@@ -90,6 +94,8 @@ struct EditSubscriptionView: View {
                                     .shadow(color: Color.white.opacity(0.5), radius: 5, x: -5, y: -5)
                             )
                         
+                        
+                        //fetch some subscriptions for the currently logged in user
     
                     }.padding()
                 }

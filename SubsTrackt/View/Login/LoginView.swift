@@ -13,6 +13,9 @@ import GoogleSignInSwift
 struct LoginView: View {
     @State private var username: String = ""
     @State private var password: String = ""
+    @State private var alertMessage: String = ""
+    @State private var showAlert: Bool = false
+    var authenticator = Authentication()
     var body: some View {
         ZStack{
             
@@ -42,11 +45,23 @@ struct LoginView: View {
                     })
                     .padding()
                     
-                    CustomLoginButton(title: "Login", iconName: "person.fill", backgroundColor: .pink){
-                        print("Login ")
-                        
+                    CustomLoginButton(title: "Login", iconName: "person.fill", backgroundColor: .pink, textColor: .white) {
+                        //using Task because it provides an async context whereas the body is not so using an async function cannot be done if not in an sync context
+                        Task {
+                            do {
+                                try await authenticator.emailSignIn(email: username, password: password)
+                            } catch let error as AuthError {
+                                alertMessage = error.localizedDescription
+                                showAlert = true
+                            } catch {
+                                alertMessage = "An unexpected error occurred."
+                                showAlert = true
+                            }
+                        }
                     }
+
                     .padding(.bottom, 35)
+             
                     
                     
                 }
@@ -70,23 +85,41 @@ struct LoginView: View {
                 .padding(.bottom, 30)
                 .frame(maxWidth: 350)
                 
-                //MARK: Google sign in button
-                //sign up options
-                HStack(spacing: 12){
+        
+                VStack(spacing: 12){
+                    Text("New here?")
+                        .font(.Poppins.semiBold.font(size: 14))
+                    CustomSignUpButton(title: "Email Sign in", iconName: "google"){
+                        print("sign up")
+                        Task{
+                            do {
+                                try await authenticator.emailSignUP(email: username, password: password)
+                            }
+                            catch let error as AuthError {
+                                alertMessage = error.localizedDescription
+                                showAlert = true
+                            } catch {
+                                alertMessage = "An unexpected error occurred."
+                                showAlert = true
+                            }
+    
+                        }
+                    }
+                    //MARK: Google sign in button
                     CustomSignUpButton(title: "Google Sign In",iconName: "google") {
                                     Task {
                                         do {
-                                            try await Authentication().googleOauth()
+                                            try await authenticator.googleOauth()
+                                        }catch let error as AuthError {
+                                            alertMessage = error.localizedDescription
+                                            showAlert = true
                                         } catch {
-
-                                        print(error.localizedDescription)
-                                            // Handle error
+                                            alertMessage = "An unexpected error occurred."
+                                            showAlert = true
                                         }
                                     }
                                 }
-                    CustomSignUpButton(title: "Email Sign In", iconName: "google") {
-                        print("Email sign up ")
-                    }
+                
                     
                 }
                 .padding(.top, 30)
@@ -94,6 +127,13 @@ struct LoginView: View {
             }
             
         }
+        .alert(isPresented: $showAlert) {
+                  Alert(
+                      title: Text("Error"),
+                      message: Text(alertMessage),
+                      dismissButton: .default(Text("OK"))
+                  )
+              }
         
     }
     
@@ -147,6 +187,7 @@ struct CustomLoginButton: View {
     var title: String
     var iconName: String
     var backgroundColor: Color
+    var textColor: Color
     var action: () -> Void
 
     var body: some View {
@@ -154,12 +195,11 @@ struct CustomLoginButton: View {
             HStack {
                 Image(systemName: iconName)
                     .font(.system(size: 24))
-                    .foregroundColor(.white)
                     .frame(width: 30, height: 30)
                 
                 Text(title)
                     .font(Font.Poppins.semiBold.font(size: 18))
-                    .foregroundColor(.white)
+                    .foregroundColor(textColor)
             }
             .padding(10)
             .background(backgroundColor)
