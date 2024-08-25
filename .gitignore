@@ -1,3 +1,4 @@
 *.DS_Store
 SubsTrackt/GoogleService-Info.plist
 build/
+SubsTrackt.xcodeproj/*

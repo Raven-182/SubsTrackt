@@ -7,7 +7,7 @@
 import Foundation
 
 struct Subscription: Identifiable, Codable {
-    var id: String
+    var id: String = UUID().uuidString
     var amount: Double
     var category: String
     var description: String
@@ -23,10 +23,16 @@ struct Subscription: Identifiable, Codable {
         self.startDate = startDate
         self.endDate = endDate
     }
+    init(amount: Double, category: String, description: String, startDate: Date, endDate: Date) {
+         self.amount = amount
+         self.category = category
+         self.description = description
+         self.startDate = startDate
+         self.endDate = endDate
+     }
 
-    // Coding keys to match Firebase field names
+    // Coding keys to match the Firebase field names
     enum CodingKeys: String, CodingKey {
-        case id
         case amount
         case category
         case description

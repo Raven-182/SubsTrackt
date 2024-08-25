@@ -16,7 +16,7 @@ struct ContentView: View {
            VStack {
                if userLoggedIn {
                   //SubscriptionsCalendarView()
-                   TestAddSubscriptionView()
+                   SubscriptionsCalendarView()
                   
                } else {
                    
