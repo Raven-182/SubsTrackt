@@ -59,31 +59,7 @@ struct Authentication {
         )
         try await Auth.auth().signIn(with: credential)
     }
-    
-    
-    
-//    func emailSignUP(email: String, password: String) throws{
-//        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-//            if error != nil{
-//                
-//                //MARK: add an alert for the error
-//                print(error! .localizedDescription)
-//            }
-//        }
-//        
-//    }
-//        
-//        func emailSignIn(email: String, password: String) throws{
-//            Auth.auth().signIn(withEmail: email, password: password){authResult, error in
-//                if error != nil{
-//                    
-//                    //MARK: add an alert for the error
-//                    print(error! .localizedDescription)
-//                }
-//            }
-//
-//    }
-//    
+        
     // MARK: Email Sign Up Method
         func emailSignUP(email: String, password: String) async throws {
             do {
