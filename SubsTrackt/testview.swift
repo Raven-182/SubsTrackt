@@ -53,14 +53,19 @@ struct TestAddSubscriptionView: View {
             id: "", // ID will be auto-generated
             amount: 15.99,
             category: "youtube",
-            description: "Monthly streaming service",
+            description: "this and this and that",
             startDate: Date(),
             endDate: Date().addingTimeInterval(30*24*60*60) // 1 month later
         )
 
-        dbManager.addSubscription(&newSubscription, forUser: userID)
-        newSubscription.category = "New one"
-        dbManager.updateSubscription(newSubscription, forUser: userID)
+        dbManager.addSubscription(&newSubscription, forUser: userID){success in
+            
+            print("yo")}
+            
+        newSubscription.category = "youtube"
+        dbManager.updateSubscription(newSubscription, forUser: userID){success in
+            
+        print("yo")}
         
         
     }

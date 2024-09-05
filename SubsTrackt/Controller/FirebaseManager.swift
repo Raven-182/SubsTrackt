@@ -10,20 +10,20 @@ import FirebaseCore
 import FirebaseDatabase
 
 class DatabaseManager: ObservableObject{
-     private var databaseRef: DatabaseReference!
+    private var databaseRef: DatabaseReference!
     @Published var subs: [Subscription] = []
     
-
-
+    
+    
     init() {
-            databaseRef = Database.database().reference()
-          //check for a nil value and end application if no reference
-          if databaseRef == nil {
-              print("Database reference is still nil.")
-          } else {
-              print("Database reference is successfully initialized.")
-          }
-      }
+        databaseRef = Database.database().reference()
+        //check for a nil value and end application if no reference
+        if databaseRef == nil {
+            print("Database reference is still nil.")
+        } else {
+            print("Database reference is successfully initialized.")
+        }
+    }
     
     //added completion handler
     func fetchSubs(forUser uid: String, completion: @escaping () -> Void) {
@@ -49,9 +49,9 @@ class DatabaseManager: ObservableObject{
             }
         }
     }
-
-
-    func addSubscription(_ subscription: inout Subscription, forUser uid: String) {
+    
+    
+    func addSubscription(_ subscription: inout Subscription, forUser uid: String, completion: @escaping (Bool) -> Void) {
         let userSubscriptionsRef = databaseRef.child("subscriptions").child(uid)
         
         // Generate a new unique ID for the subscription
@@ -72,14 +72,18 @@ class DatabaseManager: ObservableObject{
         newSubscriptionRef.setValue(subscriptionData) { error, _ in
             if let error = error {
                 print("Failed to add subscription: \(error.localizedDescription)")
+                //Mark: Use better error handling in the completion
+                completion(false)
             } else {
                 print("Subscription successfully added.")
+                completion(true)
             }
         }
     }
 
     
-    func updateSubscription(_ subscription: Subscription, forUser uid: String) {
+    
+    func updateSubscription(_ subscription: Subscription, forUser uid: String, completion: @escaping (Bool) -> Void) {
         let subscriptionData: [String: Any] = [
             "amount": subscription.amount,
             "category": subscription.category,
@@ -87,19 +91,20 @@ class DatabaseManager: ObservableObject{
             "startDate": subscription.startDate.timeIntervalSince1970,
             "endDate": subscription.endDate.timeIntervalSince1970
         ]
-
+        
         let userSubscriptionRef = databaseRef.child("subscriptions").child(uid).child(subscription.id)
-
+        
         userSubscriptionRef.updateChildValues(subscriptionData) { error, _ in
             if let error = error {
                 print("Failed to update subscription: \(error.localizedDescription)")
+                completion(false)
             } else {
                 print("Subscription successfully updated.")
+                completion(true)
             }
         }
-    }
-
-
+     }
+    
     func deleteSubscription(withId subscriptionId: String, forUser uid: String) {
         let userSubscriptionRef = databaseRef.child("subscriptions").child(uid).child(subscriptionId)
         
@@ -111,8 +116,8 @@ class DatabaseManager: ObservableObject{
             }
         }
     }
-
-    }
+    
+}
 
 
 
@@ -125,12 +130,3 @@ extension DataSnapshot {
         return try decoder.decode(T.self, from: data)
     }
 }
-
-
-
-//{
-//  "rules": {
-//    ".read": true,
-//    ".write": true
-//  }
-//}

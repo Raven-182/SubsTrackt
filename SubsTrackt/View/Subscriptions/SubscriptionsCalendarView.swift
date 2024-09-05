@@ -16,129 +16,158 @@ struct SubscriptionsCalendarView: View{
     @State private var activeSubscriptions: [Subscription] = []
     var months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov","dec"]
     let years = Array(2023...2030)
+    @State private var selectedSubscription: Subscription?
+    @State private var isShowingEditView = false
     
     init() {
-         let currentDate = Date()
-         let calendar = Calendar.current
-         let currentYear = calendar.component(.year, from: currentDate)
- 
-         let monthFormatter = DateFormatter()
-         monthFormatter.dateFormat = "MMM"
-         let monthString = monthFormatter.string(from: currentDate).lowercased()
-         
-         _selectedYear = State(initialValue: currentYear)
-         _selectedMonth = State(initialValue: monthString)
-     }
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: currentDate)
+        
+        let monthFormatter = DateFormatter()
+        monthFormatter.dateFormat = "MMM"
+        let monthString = monthFormatter.string(from: currentDate).lowercased()
+        
+        _selectedYear = State(initialValue: currentYear)
+        _selectedMonth = State(initialValue: monthString)
+    }
     var body: some View {
-        ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [Color(hex: "#22313F"), Color(hex: "#1A252F"), Color(hex: "#16222A")]),
-                startPoint: .leading,
-                endPoint: .trailing
-            )
-            .ignoresSafeArea()
-            
-            VStack {
-                HStack {
-                    Text("Your Bills")
-                        .font(.Poppins.semiBold.font(size: 25))
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 25)
-                    Spacer()
-                    Picker("Select Year", selection: $selectedYear) {
-                        ForEach(years, id: \.self) { year in
-                            Text(String(year)).tag(year).font(.Poppins.semiBold.font())
-                        }
-                    }
-                    .pickerStyle(MenuPickerStyle())  // Dropdown style
-                    .padding(.horizontal)
-                    .foregroundColor(.white)
-                }
+        NavigationView{
+            ZStack {
+                LinearGradient(
+                    gradient: Gradient(colors: [Color(hex: "#22313F"), Color(hex: "#1A252F"), Color(hex: "#16222A")]),
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+                .ignoresSafeArea()
                 
-                GeometryReader { geometry in
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        ScrollViewReader { scrollView in
-                            HStack{
-                                ForEach(months, id: \.self) { month in
-                                    GeometryReader { geo in
-                                        //mid point of the image within th eglobal coordinate
-                                        let midX = geo.frame(in: .global).midX
-                                        //mid point of the parent frame(scrollview)
-                                        let screenMidX = geometry.size.width / 2
-
-                                        Image(month)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: geometry.size.width - 60, height: 250)
-                                            .cornerRadius(40)
-                                            .shadow(color: Color.black.opacity(0.5), radius: 5, x: -5, y: -8)
-                                        
-                                        //adding animation, reduce the size
-                                            .scrollTransition(.animated.threshold(.visible(0.9))) { content, phase in
-                                                        content
-                                                    .opacity(phase.isIdentity ? 1 : 0)
-                                                            .scaleEffect(phase.isIdentity ? 1 : 0.8)
-                                             
-                                                    }
-                                //is image's center within 20 points of the screen center, newValue id the new imagi=e center
-                                        //When using .onChange(of:), the parameter in the closure represents the new value of the observed state or value.
-                                            .onChange(of: midX) {oldValue, newValue in
-                                                if abs(newValue - screenMidX) < 20 {
-                                                    selectedMonth = month
+                VStack {
+                    HStack {
+                        Text("Your Bills")
+                            .font(.Poppins.semiBold.font(size: 25))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 25)
+                        Spacer()
+                        Picker("Select Year", selection: $selectedYear) {
+                            ForEach(years, id: \.self) { year in
+                                Text(String(year)).tag(year).font(.Poppins.semiBold.font())
+                            }
+                        }
+                        .pickerStyle(MenuPickerStyle())  // Dropdown style
+                        .padding(.horizontal)
+                        .foregroundColor(.white)
+                    }
+                    
+                    GeometryReader { geometry in
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            ScrollViewReader { scrollView in
+                                HStack{
+                                    ForEach(months, id: \.self) { month in
+                                        GeometryReader { geo in
+                                            //mid point of the image within th eglobal coordinate
+                                            let midX = geo.frame(in: .global).midX
+                                            //mid point of the parent frame(scrollview)
+                                            let screenMidX = geometry.size.width / 2
+                                            
+                                            Image(month)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .frame(width: geometry.size.width - 60, height: 250)
+                                                .cornerRadius(40)
+                                                .shadow(color: Color.black.opacity(0.5), radius: 5, x: -5, y: -8)
+                                            
+                                            //adding animation, reduce the size
+                                                .scrollTransition(.animated.threshold(.visible(0.9))) { content, phase in
+                                                    content
+                                                        .opacity(phase.isIdentity ? 1 : 0)
+                                                        .scaleEffect(phase.isIdentity ? 1 : 0.8)
+                                                    
                                                 }
-                                            }
+                                            //is image's center within 20 points of the screen center, newValue id the new imagi=e center
+                                            //When using .onChange(of:), the parameter in the closure represents the new value of the observed state or value.
+                                                .onChange(of: midX) {oldValue, newValue in
+                                                    if abs(newValue - screenMidX) < 20 {
+                                                        selectedMonth = month
+                                                    }
+                                                }
+                                        }
+                                        //offsetting frame size by 60
+                                        .frame(width: geometry.size.width - 40, height: 250)
                                     }
-                                    //offsetting frame size by 60
-                                    .frame(width: geometry.size.width - 40, height: 250)
+                                    .padding(.horizontal, 10)
                                 }
-                                .padding(.horizontal, 10)
-                            }
-                            //when hstack appears on screen scroll to the current month
-                            .onAppear {
-                                if let index = months.firstIndex(of: selectedMonth) {
-                                    scrollView.scrollTo(months[index], anchor: .center)
+                                //when hstack appears on screen scroll to the current month
+                                .onAppear {
+                                    if let index = months.firstIndex(of: selectedMonth) {
+                                        scrollView.scrollTo(months[index], anchor: .center)
+                                    }
                                 }
                             }
+                            .scrollTargetLayout()
+                            .padding(.horizontal, 10)
                         }
-                        .scrollTargetLayout()
-                        .padding(.horizontal, 10)
+                        .contentMargins(16, for: .scrollContent)
+                        .scrollTargetBehavior(.viewAligned)
                     }
-                    .contentMargins(16, for: .scrollContent)
-                    .scrollTargetBehavior(.viewAligned)
-                }
-                //need to ensure that the scrollview has fixed height because geometry reader takes the entire available spance
-                .frame(height: 250)
-                .padding(.bottom, 20)
-                
-                HStack {
-                    Text("\(selectedMonth.capitalized)")
-                        .font(.Poppins.semiBold.font(size: 20))
-                        .foregroundColor(.white)
+                    //need to ensure that the scrollview has fixed height because geometry reader takes the entire available spance
+                    .frame(height: 250)
+                    .padding(.bottom, 20)
+                    
+                    HStack {
+                        Text("\(selectedMonth.capitalized)")
+                            .font(.Poppins.semiBold.font(size: 20))
+                            .foregroundColor(.white)
+                        Spacer()
+                        Text("Total: $\(monthlyTotal, specifier: "%.2f")")
+                            .font(.Poppins.semiBold.font(size: 20))
+                            .foregroundColor(.white)
+                        
+                    }
+                    .padding(.horizontal, 20)
+                    
+                    if activeSubscriptions.isEmpty{
+                        NoSubscriptionsView()
+                            .padding(.top, 35)
+                    }
+                    else{
+                        ScrollView(.vertical) {
+                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], spacing: 16) {
+                                ForEach(activeSubscriptions) { subscription in
+                                    SubTile(subscription: subscription)
+                                        .onTapGesture {
+                                            selectedSubscription = subscription   // Set the selected subscription
+                                            isShowingEditView = true              // Show the modal view
+                                        }
+                                }
+                            }
+                            .padding(.horizontal)
+                        }
+                    }
                     Spacer()
-                    Text("Total: $\(monthlyTotal, specifier: "%.2f")")
-                        .font(.Poppins.semiBold.font(size: 20))
-                        .foregroundColor(.white)
+                    
                     
                 }
-                .padding(.horizontal, 20)
+                .padding(.top, 30)
+                .onChange(of: selectedYear) { oldValue, newValue in
+                    fetchAndFilterSubscriptions()
+                }
+                .onChange(of: selectedMonth) { oldValue, newValue in
+                    fetchAndFilterSubscriptions()
+                }
+                .onAppear {
+                    fetchAndFilterSubscriptions()
+                }
+                .onChange(of: isShowingEditView) {oldValue, newValue in
+                    fetchAndFilterSubscriptions()
+                }
                 
-                
-                SubTileView(subscriptions: activeSubscriptions)
-                Spacer()
-            
-
             }
-            .padding(.top, 30)
-            .onChange(of: selectedYear) { oldValue, newValue in
-                fetchAndFilterSubscriptions()
+        }
+        .navigationBarHidden(true)
+        .sheet(isPresented: $isShowingEditView) {
+            if let selectedSubscription = selectedSubscription {
+                EditSubscriptionView(subscription: selectedSubscription)  // Present modal view
             }
-            .onChange(of: selectedMonth) { oldValue, newValue in
-                fetchAndFilterSubscriptions()
-            }
-            .onAppear {
-                fetchAndFilterSubscriptions()
-            }
-            
         }
     }
     private func fetchAndFilterSubscriptions() {
@@ -147,11 +176,11 @@ struct SubscriptionsCalendarView: View{
             return
         }
         
-        // Fetch subscriptions
+        // Fetch subscriptions and filter in closure
         databaseManager.fetchSubs(forUser: uid) {
-         
+            
             let calendar = Calendar.current
-        
+            
             let selectedMonthIndex = self.months.firstIndex(of: self.selectedMonth)! + 1
             
             self.activeSubscriptions = self.databaseManager.subs.filter { subscription in
@@ -161,7 +190,7 @@ struct SubscriptionsCalendarView: View{
                 var startMonth = subscriptionStartComponents.month!
                 var startYear = subscriptionStartComponents.year!
                 var endMonth = subscriptionEndComponents.month!
-                var endYear = subscriptionEndComponents.year!
+                let endYear = subscriptionEndComponents.year!
                 
                 // If the subscription is ending in the same month, offset the end month by 1
                 if startYear == endYear && endMonth == startMonth {
@@ -179,27 +208,14 @@ struct SubscriptionsCalendarView: View{
             self.monthlyTotal = self.activeSubscriptions.reduce(0) { $0 + $1.amount }
         }
     }
-
-
-}
-
-
-
-struct SubTileView: View {
-    var subscriptions: [Subscription]
     
-    var body: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], spacing: 16) {
-            ForEach(subscriptions) { subscription in
-                SubTile(subscription: subscription)
-            }
-        }
-        .padding(.horizontal)
-    }
+    
 }
+
+
 struct SubTile : View {
     var subscription: Subscription
-
+    
     var body: some View {
         ZStack {
             TransparentView(removeFilters: true)
@@ -215,9 +231,9 @@ struct SubTile : View {
             VStack(alignment: .leading, spacing: 4) {
                 Image(subscription.category)
                     .resizable()
-                    .frame(width: 40, height: 40)
+                    .frame(width: 50, height: 50)
                 Spacer()
-                Text(subscription.category)
+                Text(subscription.category.capitalized)
                     .font(.Poppins.semiBold.font(size: 14))
                     .foregroundColor(.white)
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
@@ -229,12 +245,31 @@ struct SubTile : View {
                 
             }
             .padding()
-      
+            
         }
         .padding(15)
         .frame(minWidth: 0, maxWidth: .infinity)
         .aspectRatio(1, contentMode: .fill)
         .cornerRadius(12)
+    }
+}
+
+
+struct NoSubscriptionsView: View {
+    var body: some View {
+        VStack {
+            Image("money-bags")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 80, height: 80)
+                .foregroundColor(.white)
+                .padding(.bottom, 20)
+            
+            Text("No Subscriptions this month!")
+                .font(.Poppins.semiBold.font(size: 20))
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+        }
     }
 }
 

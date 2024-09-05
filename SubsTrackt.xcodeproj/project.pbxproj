@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9739C1252C84EF29007649BD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9739C1242C84EF29007649BD /* MainView.swift */; };
+		9739C1272C893A07007649BD /* CommonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9739C1262C893A07007649BD /* CommonViews.swift */; };
 		9765C89E2C53DEA800322943 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9765C89D2C53DEA800322943 /* SignUpViewModel.swift */; };
 		9765C8A02C56977A00322943 /* AddNewSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9765C89F2C56977A00322943 /* AddNewSubscriptionView.swift */; };
 		976689132C2B986000DB9855 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976689122C2B986000DB9855 /* LoginView.swift */; };
@@ -17,11 +19,12 @@
 		976B71A32C57DE4D001FFD9C /* SubscriptionCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976B71A22C57DE4D001FFD9C /* SubscriptionCategories.swift */; };
 		9772200B2C693AEE00391D44 /* EditSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772200A2C693AEE00391D44 /* EditSubscriptionView.swift */; };
 		9772200D2C6FE63300391D44 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772200C2C6FE63300391D44 /* FirebaseManager.swift */; };
+		977220122C72A70900391D44 /* testview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977220112C72A70900391D44 /* testview.swift */; };
+		977220142C72A91A00391D44 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 977220132C72A91A00391D44 /* GoogleService-Info.plist */; };
 		979C7B6B2C34B2AA00F797AD /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 979C7B6A2C34B2AA00F797AD /* GoogleSignIn */; };
 		979C7B6D2C34B2AA00F797AD /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 979C7B6C2C34B2AA00F797AD /* GoogleSignInSwift */; };
-		979C7B712C34B4BD00F797AD /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C7B702C34B4BD00F797AD /* AuthViewModel.swift */; };
+		979C7B712C34B4BD00F797AD /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C7B702C34B4BD00F797AD /* Authentication.swift */; };
 		979C7B732C3F546D00F797AD /* TransparentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C7B722C3F546D00F797AD /* TransparentView.swift */; };
-		979C7B752C40B45E00F797AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 979C7B742C40B45E00F797AD /* GoogleService-Info.plist */; };
 		979C7B772C4737B500F797AD /* SubscriptionsCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C7B762C4737B500F797AD /* SubscriptionsCalendarView.swift */; };
 		979C7B7A2C4F216200F797AD /* SubscriptionsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C7B792C4F216200F797AD /* SubscriptionsData.swift */; };
 		97CC82E92C24FE6000E0AA19 /* SubsTracktApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CC82E82C24FE6000E0AA19 /* SubsTracktApp.swift */; };
@@ -57,15 +60,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9739C1242C84EF29007649BD /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		9739C1262C893A07007649BD /* CommonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViews.swift; sourceTree = "<group>"; };
 		9765C89D2C53DEA800322943 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		9765C89F2C56977A00322943 /* AddNewSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewSubscriptionView.swift; sourceTree = "<group>"; };
 		976689122C2B986000DB9855 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		976B71A22C57DE4D001FFD9C /* SubscriptionCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCategories.swift; sourceTree = "<group>"; };
 		9772200A2C693AEE00391D44 /* EditSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSubscriptionView.swift; sourceTree = "<group>"; };
 		9772200C2C6FE63300391D44 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
-		979C7B702C34B4BD00F797AD /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		977220112C72A70900391D44 /* testview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testview.swift; sourceTree = "<group>"; };
+		977220132C72A91A00391D44 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		979C7B702C34B4BD00F797AD /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		979C7B722C3F546D00F797AD /* TransparentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentView.swift; sourceTree = "<group>"; };
-		979C7B742C40B45E00F797AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		979C7B762C4737B500F797AD /* SubscriptionsCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsCalendarView.swift; sourceTree = "<group>"; };
 		979C7B792C4F216200F797AD /* SubscriptionsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsData.swift; sourceTree = "<group>"; };
 		97CC82E52C24FE6000E0AA19 /* SubsTrackt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SubsTrackt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,9 +124,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9739C1232C7BFC60007649BD /* Subscriptions */ = {
+			isa = PBXGroup;
+			children = (
+				979C7B762C4737B500F797AD /* SubscriptionsCalendarView.swift */,
+				9765C89F2C56977A00322943 /* AddNewSubscriptionView.swift */,
+				9772200A2C693AEE00391D44 /* EditSubscriptionView.swift */,
+				9739C1242C84EF29007649BD /* MainView.swift */,
+			);
+			path = Subscriptions;
+			sourceTree = "<group>";
+		};
 		9772200E2C72750700391D44 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				979C7B702C34B4BD00F797AD /* Authentication.swift */,
 				9772200C2C6FE63300391D44 /* FirebaseManager.swift */,
 			);
 			path = Controller;
@@ -158,17 +176,16 @@
 		97CC82E72C24FE6000E0AA19 /* SubsTrackt */ = {
 			isa = PBXGroup;
 			children = (
+				977220112C72A70900391D44 /* testview.swift */,
 				9772200E2C72750700391D44 /* Controller */,
 				979C7B782C4F215200F797AD /* Model */,
-				979C7B742C40B45E00F797AD /* GoogleService-Info.plist */,
 				97CC83192C288FD900E0AA19 /* Info.plist */,
+				977220132C72A91A00391D44 /* GoogleService-Info.plist */,
 				97CC83132C288B0700E0AA19 /* View */,
 				97CC82E82C24FE6000E0AA19 /* SubsTracktApp.swift */,
-				97CC82EA2C24FE6000E0AA19 /* ContentView.swift */,
 				97CC82EC2C24FE6700E0AA19 /* Assets.xcassets */,
 				97CC83122C288ABD00E0AA19 /* Fonts */,
 				97CC82EE2C24FE6700E0AA19 /* Preview Content */,
-				979C7B702C34B4BD00F797AD /* AuthViewModel.swift */,
 			);
 			path = SubsTrackt;
 			sourceTree = "<group>";
@@ -211,12 +228,10 @@
 		97CC83132C288B0700E0AA19 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9739C1232C7BFC60007649BD /* Subscriptions */,
 				97CC83222C28965200E0AA19 /* CommonUIElements */,
 				97CC83272C28E0D100E0AA19 /* Login */,
 				97CC83212C28963A00E0AA19 /* MainTab */,
-				979C7B762C4737B500F797AD /* SubscriptionsCalendarView.swift */,
-				9765C89F2C56977A00322943 /* AddNewSubscriptionView.swift */,
-				9772200A2C693AEE00391D44 /* EditSubscriptionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -224,6 +239,7 @@
 		97CC83212C28963A00E0AA19 /* MainTab */ = {
 			isa = PBXGroup;
 			children = (
+				97CC82EA2C24FE6000E0AA19 /* ContentView.swift */,
 			);
 			path = MainTab;
 			sourceTree = "<group>";
@@ -234,6 +250,7 @@
 				97CC83232C28971000E0AA19 /* Extenstions.swift */,
 				97CC83252C2899DB00E0AA19 /* HelperFunctions.swift */,
 				979C7B722C3F546D00F797AD /* TransparentView.swift */,
+				9739C1262C893A07007649BD /* CommonViews.swift */,
 			);
 			path = CommonUIElements;
 			sourceTree = "<group>";
@@ -369,7 +386,7 @@
 				97CC82F02C24FE6700E0AA19 /* Preview Assets.xcassets in Resources */,
 				97CC82ED2C24FE6700E0AA19 /* Assets.xcassets in Resources */,
 				97CC831F2C28952B00E0AA19 /* Poppins-Medium.otf in Resources */,
-				979C7B752C40B45E00F797AD /* GoogleService-Info.plist in Resources */,
+				977220142C72A91A00391D44 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,9 +418,12 @@
 				979C7B772C4737B500F797AD /* SubscriptionsCalendarView.swift in Sources */,
 				97CC83292C28E0E600E0AA19 /* SplashScreen.swift in Sources */,
 				97CC82EB2C24FE6000E0AA19 /* ContentView.swift in Sources */,
-				979C7B712C34B4BD00F797AD /* AuthViewModel.swift in Sources */,
+				9739C1272C893A07007649BD /* CommonViews.swift in Sources */,
+				979C7B712C34B4BD00F797AD /* Authentication.swift in Sources */,
 				97CC83262C2899DB00E0AA19 /* HelperFunctions.swift in Sources */,
 				97CC82E92C24FE6000E0AA19 /* SubsTracktApp.swift in Sources */,
+				977220122C72A70900391D44 /* testview.swift in Sources */,
+				9739C1252C84EF29007649BD /* MainView.swift in Sources */,
 				979C7B732C3F546D00F797AD /* TransparentView.swift in Sources */,
 				9772200D2C6FE63300391D44 /* FirebaseManager.swift in Sources */,
 				97CC83242C28971000E0AA19 /* Extenstions.swift in Sources */,
@@ -502,6 +522,8 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				"OTHER_LDFLAGS[arch=*]" = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -558,6 +580,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
@@ -589,7 +612,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -618,7 +641,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

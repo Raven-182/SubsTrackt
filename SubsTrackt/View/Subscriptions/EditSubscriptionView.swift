@@ -10,14 +10,20 @@ import FirebaseAuth
 
 
 struct EditSubscriptionView: View {
-
+    
     @ObservedObject var databaseManager = DatabaseManager()
-    @State private var userID: String? = Auth.auth().currentUser?.uid
-    
-    //@State private var subscription: Subscription // Holds the subscription being edited, received from previous view
-    
+    // Holds the subscription being edited, received from previous view
+    @State private var subscription: Subscription // No default value, will be passed in
     //MARK: Edit to get the name logo and other info from the database
-
+    @State private var subscriptionCategory: SubscriptionCategory = .other
+    @Environment(\.dismiss) var dismiss
+    // state to show confirmation alert
+    @State private var showDeleteConfirmation: Bool = false
+    @State private var showSuccessBubble: Bool = false
+    @State private var successMessage = "Updated!"
+    init(subscription: Subscription) {
+        _subscription = State(initialValue: subscription) // Initialize with the passed subscription
+    }
     
     var body: some View {
         ZStack {
@@ -40,86 +46,139 @@ struct EditSubscriptionView: View {
                             )
                         
                         VStack{
+                            let subscriptionCategory = SubscriptionCategory(rawValue: subscription.category) ?? .other
                             HStack{
                                 Button{
-                                    print("Dismiss")
+                                    dismiss()
                                 }      label: {
                                     Label("Dismiss", systemImage: "chevron.down")
                                         .foregroundStyle(.white)
                                     
                                 } .padding()
                                 Spacer()
-//                                Text("Subscription info")
-//                                    .multilineTextAlignment(.center)
-//                                    .foregroundColor(.white)
-//                                Spacer()
                                 Button{
                                     
-                                                                          //MARK: Ask for confirmation for deletion
-//                                    databaseManager.deleteSubscription(withId: subscription.id, forUser: userID!)
-//
-                                        //MARK: navigate back if deleted
-                                                                        
-                                                                        
+                                    //MARK: Ask for confirmation for deletion
+                                    showDeleteConfirmation = true
+                                    
                                 }      label: {
                                     Label("Delete", systemImage: "trash")
                                         .foregroundStyle(.white)
                                     
                                 } .padding()
                                 
-                                
                             }
-                           
-                            Image("spotify")
+                            
+                            Image(subscriptionCategory.logo)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 180, height: 180)
                                 .cornerRadius(40)
                             
-                            Text("Spotify")
+                            Text(subscription.category)
                                 .font(.Poppins.semiBold.font(size: 22))
                                 .foregroundColor(.white)
                                 .padding()
                             
                         }
                         
-                        
-                        
                     }.frame(height: .widthPer(percent: 0.8))
                         .padding()
                     Spacer()
                     
-                    //MARK: Show other information here
                     
+                    //show the amount, editable
+                    Text(String(format: "%.2f", subscription.amount)).font(.Poppins.semiBold.font(size: 28)).foregroundColor(.white)
+                    Divider().background().frame(width: 350)
                     
-                 //show the amount, editable
-                    Text("$23.00").font(.Poppins.semiBold.font(size: 28)).foregroundColor(.white)
-                
-                    //show description
+                    // Description TextField
+                    // Multi-line Description TextEditor
+                    TextEditor(text: $subscription.description)
+                        .font(.Poppins.regular.font(size: 18))
+                        .foregroundColor(.white)
+                        .padding()
+                    //to hide its default white background
+                        .scrollContentBackground(.hidden)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.white.opacity(0.1))
+                        )
+                        .frame(minHeight: 100) // Minimum height, expands as needed
                     
-                    //show end date field
-//                    DatePicker(
-//                        "End",
-//                        selection: $endDate,
-//                        displayedComponents: [.date]
-//                    )
-//                    .datePickerStyle(CompactDatePickerStyle())
-//                    .colorScheme(.dark)
+                        .padding()
                     
-                    //do update
+                    DatePicker(
+                        "End",
+                        selection: $subscription.endDate,
+                        displayedComponents: [.date]
+                    )
+                    .datePickerStyle(CompactDatePickerStyle())
+                    .colorScheme(.dark)
+                    .padding(.horizontal, 30)
+                    .padding()
                     
+                    Divider().background().frame(width: 350)
+                    
+                    Button("Update subscription") {
+                        guard let userID = Auth.auth().currentUser?.uid else {
+                            print("No user is logged in.")
+                            return
+                        }
+                        databaseManager.updateSubscription(subscription, forUser: userID) { success in
+                            if success {
+                                withAnimation {
+                                    successMessage = "Updated!"
+                                    showSuccessBubble = true
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    withAnimation {
+                                        showSuccessBubble = false
+                                    }
+                                }
+                            } else {
+                                withAnimation {
+                                    successMessage = "Couldn't update!"
+                                    showSuccessBubble = true
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    withAnimation {
+                                        showSuccessBubble = false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .font(.Poppins.semiBold.font(size: 16))
+                    .buttonStyle(primaryButton())
+                    .padding()
                     
                     
                 }
             }
-     
+            // Present the confirmation alert
+            .alert(isPresented: $showDeleteConfirmation) {
+                Alert(
+                    title: Text("Delete Subscription"),
+                    message: Text("Are you sure you want to delete this subscription? This action cannot be undone."),
+                    primaryButton: .destructive(Text("Delete")) {
+                        guard let userID = Auth.auth().currentUser?.uid else {
+                            print("No user is logged in.")
+                            return
+                        }
+                        databaseManager.deleteSubscription(withId: subscription.id, forUser: userID)
+                        dismiss() // Dismiss modal after deletion
+                    },
+                    secondaryButton: .cancel()
+                )
+            }
             
-          
+            if showSuccessBubble {
+                SuccessBubble(message: successMessage)
+                    .padding()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                    .offset(y: 30)
+            }
+            
         }
     }
-}
-
-
-#Preview {
-    EditSubscriptionView()
 }

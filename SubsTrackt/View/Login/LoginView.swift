@@ -89,6 +89,7 @@ struct LoginView: View {
                 VStack(spacing: 12){
                     Text("New here?")
                         .font(.Poppins.semiBold.font(size: 14))
+                        .foregroundColor(.white)
                     CustomSignUpButton(title: "Email Sign in", iconName: "google"){
                         print("sign up")
                         Task{

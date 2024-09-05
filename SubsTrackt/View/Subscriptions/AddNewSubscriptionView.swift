@@ -2,17 +2,21 @@ import Foundation
 import SwiftUI
 
 struct AddNewSubscriptionView: View {
+    @ObservedObject var databaseManager = DatabaseManager()
+    //need a subscription object
     @State var selectedCategory: String = SubscriptionCategory.youtube.displayName
     @State var description: String = ""
     @State var startDate: Date = Date.now
     @State var endDate: Date = Date()
     @State var amount: Double = 0.0
     
+    
+    
     var body: some View {
+        
         ZStack {
             AppGradients.primaryBackground
-                          .ignoresSafeArea()
-            
+                .ignoresSafeArea()
             VStack {
                 VStack {
                     ZStack {
@@ -27,23 +31,12 @@ struct AddNewSubscriptionView: View {
                                     .shadow(color: Color.white.opacity(0.5), radius: 5, x: -5, y: -5)
                             )
                         
-                        VStack {
-                            HStack{
-                                
-                                //MARK: Navigation handle here
-                                Button{
-                                    print("Go back please!")
-                                }      label: {
-                                    Image(systemName: "chevron.left")
-                                    
-                                }
-                                Spacer()
-                            }
+                        VStack(spacing: 15) {
                             Text("Add a new subscription")
                                 .font(.Poppins.semiBold.font(size: 28))
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.center)
-                                .padding(.bottom, 1)
+                                .padding(.top, 50)
                             ScrollView(.horizontal, showsIndicators: false) {
                                 ScrollViewReader { _ in
                                     HStack {
@@ -56,8 +49,8 @@ struct AddNewSubscriptionView: View {
                                                 
                                                 Image(sub.logo)
                                                     .resizable()
-                                                    .aspectRatio(contentMode: .fill)
-                                                    .frame(width: 200, height: 180)
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: 200, height: 170)
                                                     .cornerRadius(40)
                                                     .shadow(color: Color.black.opacity(0.5), radius: 5, x: -5, y: -8)
                                                     .scrollTransition(.animated.threshold(.visible(0.8))) { content, phase in
@@ -78,57 +71,58 @@ struct AddNewSubscriptionView: View {
                             }
                             .contentMargins(16, for: .scrollContent)
                             .scrollTargetBehavior(.viewAligned)
+                            .padding(.top, 1)
+                            .padding(.horizontal, 6)
                             
                             Text(selectedCategory)
                                 .font(.Poppins.semiBold.font(size: 22))
-                                .foregroundColor(.white)
-
+                                .foregroundColor(.white).padding()
+                                .padding(.bottom, 10)
+                            
                         }
-                        .padding(50)
+                        .padding(.horizontal, 50)
                     }
                     .edgesIgnoringSafeArea(.top)
-                    .frame(height: .widthPer(percent: 1)) // Set a fixed height for the inner ZStack because it keeps stretching
+                    .frame(height: .widthPer(percent: 0.9)) // Set a fixed height for the inner ZStack because it keeps stretching
                 }
-//                Text("Description")
-//                .foregroundColor(.white.opacity(0.5))
-//                                           .padding(.horizontal, 15)
                 TextField("", text: $description, prompt: Text("Description").foregroundColor(.white))
-                                               .padding()
-                                               .frame(height: 60)
-                                               .background(
-                                                   AppGradients.primaryBackground
-                                                       .cornerRadius(8)
-                                               )
-                                               .overlay(
-                                                   RoundedRectangle(cornerRadius: 8)
-                                                    .stroke(Color.white, lineWidth: 0.1)
-                                               )
-                                               .foregroundColor(.white)
-                                               .padding(.top, 25)
-                                               .padding(.horizontal)
+                    .padding()
+                    .frame(height: 60)
+                    .background(
+                        AppGradients.primaryBackground
+                            .cornerRadius(8)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.white, lineWidth: 0.1)
+                    )
+                    .foregroundColor(.white)
+                    .padding(.top)
+                    .padding(.horizontal)
                 
                 
-                //date picker for end date and start date 
+                
+                //date picker for end date and start date
                 HStack(spacing: 15) {
-                     // Start Date DatePicker
-                     DatePicker(
-                         "Start",
-                         selection: $startDate,
-                         displayedComponents: [.date]
-                     )
-                     .datePickerStyle(CompactDatePickerStyle())
-                     .frame(height: 80)
-                     .colorScheme(.dark)
-                     // End Date DatePicker
-                     DatePicker(
-                         "End",
-                         selection: $endDate,
-                         displayedComponents: [.date]
-                     )
-                     .datePickerStyle(CompactDatePickerStyle())
-                     .colorScheme(.dark)
+                    // Start Date DatePicker
+                    DatePicker(
+                        "Start",
+                        selection: $startDate,
+                        displayedComponents: [.date]
+                    )
+                    .datePickerStyle(CompactDatePickerStyle())
+                    .frame(height: 80)
+                    .colorScheme(.dark)
+                    // End Date DatePicker
+                    DatePicker(
+                        "End",
+                        selection: $endDate,
+                        displayedComponents: [.date]
+                    )
+                    .datePickerStyle(CompactDatePickerStyle())
+                    .colorScheme(.dark)
                     
-                }.padding()
+                }.padding(.horizontal)
                 
                 HStack(alignment: .center){
                     Button{
@@ -146,22 +140,21 @@ struct AddNewSubscriptionView: View {
                     VStack{
                         Text("Monthly Price").font(.Poppins.medium.font(size: 12 )).foregroundColor(.white)
                         TextField("", value: $amount, formatter: NumberFormatter())
-                               
-                                                    .frame(width: 100, height: 50)
-                                                                           .overlay(
-                                                        RoundedRectangle(cornerRadius: 8)
-                                                            .stroke(Color.white, lineWidth: 0.1)
-                                                    )
-                                                    .foregroundColor(.white)
-                                                    .multilineTextAlignment(.center)
-                                                    .padding(.bottom, 28)
-                                                    .padding(.top, 5)
+                        
+                            .frame(width: 100, height: 50)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.white, lineWidth: 0.1)
+                            )
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .padding(.bottom, 28)
+                        
                     }
                     
                     Spacer()
                     Button{
                         amount += 1.0
-                        
                     } label: {
                         Image("plus")
                             .resizable()
@@ -171,17 +164,19 @@ struct AddNewSubscriptionView: View {
                     
                     
                 }.padding(.horizontal, 40)
-
+                
                 Spacer()
-
+                
                 Button("Add subscription") {
-                        }
-                .font(.Poppins.semiBold.font(size: 16))
-                        .buttonStyle(primaryButton())
-                        .padding(.bottom, 20)
+                    
+                }
+                .font(.Poppins.semiBold.font(size: 14))
+                .buttonStyle(primaryButton())
+                .padding(.bottom, 20)
             }
         }
     }
+    
 }
 
 #Preview {
