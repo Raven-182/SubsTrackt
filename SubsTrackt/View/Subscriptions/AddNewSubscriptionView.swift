@@ -1,16 +1,21 @@
 import Foundation
+import FirebaseAuth
 import SwiftUI
 
 struct AddNewSubscriptionView: View {
     @ObservedObject var databaseManager = DatabaseManager()
     //need a subscription object
-    @State var selectedCategory: String = SubscriptionCategory.youtube.displayName
+    @State var selectedCategory: String = SubscriptionCategory.youtube.logo
     @State var description: String = ""
     @State var startDate: Date = Date.now
     @State var endDate: Date = Date()
     @State var amount: Double = 0.0
     
+    // Validation error messages
+    @State private var errorMessage: String = ""
     
+    // Binding to control the tab selection from here
+    @Binding var selectedTab: Int
     
     var body: some View {
         
@@ -59,7 +64,7 @@ struct AddNewSubscriptionView: View {
                                                     .padding(.horizontal, 25)
                                                     .onChange(of: midX) { oldValue, newValue in
                                                         if abs(newValue - screenMidX) < 35 {
-                                                            selectedCategory = sub.displayName
+                                                            selectedCategory = sub.logo
                                                         }
                                                     }
                                             }
@@ -74,7 +79,7 @@ struct AddNewSubscriptionView: View {
                             .padding(.top, 1)
                             .padding(.horizontal, 6)
                             
-                            Text(selectedCategory)
+                            Text(selectedCategory.capitalized)
                                 .font(.Poppins.semiBold.font(size: 22))
                                 .foregroundColor(.white).padding()
                                 .padding(.bottom, 10)
@@ -164,11 +169,19 @@ struct AddNewSubscriptionView: View {
                     
                     
                 }.padding(.horizontal, 40)
-                
+                if !errorMessage.isEmpty {
+                               Text(errorMessage)
+                                   .foregroundColor(.red)
+                                   .padding(.bottom, 10)
+                           }
                 Spacer()
                 
                 Button("Add subscription") {
-                    
+                    if validateForm(){
+                        addSubscription()
+                        //MARK: ADD SWITCH TO THE OTHER TAB HERE
+                        selectedTab = 0
+                    }
                 }
                 .font(.Poppins.semiBold.font(size: 14))
                 .buttonStyle(primaryButton())
@@ -177,8 +190,47 @@ struct AddNewSubscriptionView: View {
         }
     }
     
+    private func validateForm() -> Bool {
+          errorMessage = ""
+          
+          if startDate > endDate {
+              errorMessage = "End date cannot be before start date."
+              return false
+          }
+          
+          if amount <= 0 {
+              errorMessage = "Amount must be greater than zero."
+              return false
+          }
+          
+          return true
+      }
+    private func addSubscription() {
+        // Create a new Subscription object
+         var newSubscription = Subscription(
+            amount: amount, category: selectedCategory,
+            description: description,
+            startDate: startDate,
+            endDate: endDate
+        )
+        guard let userID = Auth.auth().currentUser?.uid else {
+            print("No user is logged in.")
+            return
+        }
+        // Add the subscription to the database
+        databaseManager.addSubscription(&newSubscription, forUser: userID){success in
+            if success{
+              //MARK: Show success message here
+            }
+            else{
+                print("couldnt add")
+            }}
+        
+        // You can add additional logic here if needed
+    }
+    
 }
 
-#Preview {
-    AddNewSubscriptionView()
-}
+//#Preview {
+//    AddNewSubscriptionView()
+//}

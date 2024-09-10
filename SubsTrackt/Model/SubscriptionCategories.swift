@@ -35,29 +35,29 @@ enum SubscriptionCategory: String, CaseIterable, Identifiable {
         case .spotify:
             return "spotify"
         case .netflix:
-            return "netflix_logo"
+            return "netflix"
         case .openAI:
-            return "openai_logo"
+            return "openAI"
         case .hulu:
-            return "hulu_logo"
+            return "hulu"
         case .disneyPlus:
-            return "disneyplus_logo"
+            return "disney plus"
         case .appleMusic:
-            return "applemusic_logo"
+            return "apple music"
         case .amazonPrime:
-            return "amazonprime_logo"
+            return "amazon prime"
         case .audible:
-            return "audible_logo"
+            return "audible"
         case .microsoftOffice:
-            return "microsoftoffice_logo"
+            return "microsoft office"
         case .dropbox:
-            return "dropbox_logo"
+            return "dropbox"
         case .googleDrive:
-            return "googledrive_logo"
+            return "google drive"
         case .adobeCreativeCloud:
-            return "adobecreativecloud_logo"
+            return "adobe creative cloud"
         case .other:
-            return "other_logo"
+            return "other"
         }
     }
 
